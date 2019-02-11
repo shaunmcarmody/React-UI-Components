@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const HeaderTitle = () => {
     return (
-        <h1 class="header-title">
+        <h1 className="header-title">
             Lambda School
             <span className="handle">
                 @Lambda School
