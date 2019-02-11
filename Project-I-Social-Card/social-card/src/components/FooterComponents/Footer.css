@@ -1,17 +1,21 @@
-.Comment::before {
-    content: "\f151";
+.footer {
+    display: flex;
+    margin-left: 60px;
 }
 
-.Retweet::before {
-    content: "\f152";
+.icon {
+    display: flex;
+    margin-top: 20px;
+    margin-right: 55px;
 }
 
-.Like::before {
-    content: "\f153";
+.icon i,
+.icon span {
+    line-height: 20px;
+    vertical-align: middle;
 }
 
-.Message::before {
-    content: "\f154";
+.icon span {
+    font-size: 1.4rem;
+    margin-left: 3px;
 }
-
-

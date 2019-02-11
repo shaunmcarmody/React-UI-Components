@@ -1,4 +1,7 @@
 .card-container {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 10px 0 0 60px;
     width: 500px;
 }
 
@@ -8,7 +11,23 @@
 }
 
 .card-banner {
-    background: url(https://tk-assets.lambdaschool.com/fcd75197-7d12-46ec-bc9e-4130f34822fa_reactbackground.png) center center no-repeat;
-    height: 400px;
+    background: url(https://tk-assets.lambdaschool.com/fcd75197-7d12-46ec-bc9e-4130f34822fa_reactbackground.png) center no-repeat;
+    border-radius: 10px 10px 0 0;
+    height: 250px;
     width: 100%;
+}
+
+.card-content {
+    padding: 12px;
+}
+
+.card-content h1 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.card-content p {
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin-top: 10px;
 }

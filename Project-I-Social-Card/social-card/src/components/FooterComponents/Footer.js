@@ -4,11 +4,11 @@ import FooterIcon from './FooterIcon';
 
 const Footer = () => {
     return (
-        <div>
-            <FooterIcon icon="Icon Comment" />
-            <FooterIcon icon="Icon Retweet" total="6" />
-            <FooterIcon icon="Icon Like" total="4" />
-            <FooterIcon icon="Icon Message" />
+        <div className="footer">
+            <FooterIcon icon="far fa-comment fa-2x" />
+            <FooterIcon icon="fas fa-retweet fa-2x" total="6" />
+            <FooterIcon icon="far fa-heart fa-2x" total="4" />
+            <FooterIcon icon="far fa-envelope fa-2x" />
         </div>
     )
 }
