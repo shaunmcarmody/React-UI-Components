@@ -1,1 +1,14 @@
-/* All styles for your Card Components live here */
+.card-container {
+    width: 500px;
+}
+
+.card-container a {
+    color: black;
+    text-decoration: none;
+}
+
+.card-banner {
+    background: url(https://tk-assets.lambdaschool.com/fcd75197-7d12-46ec-bc9e-4130f34822fa_reactbackground.png) center center no-repeat;
+    height: 400px;
+    width: 100%;
+}

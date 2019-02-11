@@ -1,0 +1,17 @@
+.Comment::before {
+    content: "\f151";
+}
+
+.Retweet::before {
+    content: "\f152";
+}
+
+.Like::before {
+    content: "\f153";
+}
+
+.Message::before {
+    content: "\f154";
+}
+
+
