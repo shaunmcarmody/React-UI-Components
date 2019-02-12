@@ -1,0 +1,21 @@
+.footer {
+    display: flex;
+    margin-left: 60px;
+}
+
+.icon {
+    display: flex;
+    margin-top: 20px;
+    margin-right: 55px;
+}
+
+.icon i,
+.icon span {
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.icon span {
+    font-size: 1.4rem;
+    margin-left: 3px;
+}
