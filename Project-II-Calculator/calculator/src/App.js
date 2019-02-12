@@ -7,7 +7,7 @@ import CalculatorDisplay from './components/DisplayComponents/CalculatorDisplay'
 const App = () => {
   return (
     <div className="calculator">
-      <CalculatorDisplay displayStyle="display"/>
+      <CalculatorDisplay displayStyle="display" text="0"/>
       <div className="flex">
         <ActionButton buttonStyle="clear" text="clear" />
         <NumberButton buttonStyle="symbol" text="÷"/>
