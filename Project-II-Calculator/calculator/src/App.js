@@ -16,21 +16,13 @@ class App extends React.Component {
     }
   }
 
-  add = (a, b) => {
-    return this.state.previous + this.state.current;
-  }
+  add = (a, b) => this.state.previous + this.state.current;
 
-  divide = (a, b) => {
-    return this.state.previous / this.state.current;
-  }
+  divide = (a, b) => this.state.previous / this.state.current;
 
-  mutliply = (a, b) => {
-    return this.state.previous * this.state.current;
-  }
+  mutliply = (a, b) => this.state.previous * this.state.current;
 
-  subtract = (a, b) => {
-    return this.state.previous - this.state.current;
-  }
+  subtract = (a, b) => this.state.previous - this.state.current;
 
   // Try and refactor - make more modular - invoke this.calculate to update display, total and view.
   assignOperator = (operator) => {
