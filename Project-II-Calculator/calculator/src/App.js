@@ -8,35 +8,41 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      current: 0,
       total: 0
     }
+    this.operation = this.add;
+  }
+
+  add = (a, b) => {
+    return a + b;
+  }
+
+  current = e => {
+    console.log('works');
   }
 
   render() {
     return (
       <div className="calculator">
-        <CalculatorDisplay displayStyle="display" text={this.state.total}/>
-        <div className="flex">
-          <ActionButton buttonStyle="clear" text="clear" />
-          <NumberButton buttonStyle="symbol" text="÷"/>
-        </div>
+        <CalculatorDisplay displayStyle="display" value={this.state.total}/>
         <div className="flex wrap">
-          <NumberButton buttonStyle="number" text="7"/>
-          <NumberButton buttonStyle="number" text="8"/>
-          <NumberButton buttonStyle="number" text="9"/>
-          <NumberButton buttonStyle="symbol" text="×"/>
-          <NumberButton buttonStyle="number" text="4"/>
-          <NumberButton buttonStyle="number" text="5"/>
-          <NumberButton buttonStyle="number" text="6"/>
-          <NumberButton buttonStyle="symbol" text="-"/>
-          <NumberButton buttonStyle="number" text="1"/>
-          <NumberButton buttonStyle="number" text="2"/>
-          <NumberButton buttonStyle="number" text="3"/>
-          <NumberButton buttonStyle="symbol" text="+"/>
-        </div>
-        <div className="flex">
-        <ActionButton buttonStyle="big zero" text="0" />
-          <NumberButton buttonStyle="symbol" text="="/>
+          <ActionButton buttonStyle="action clear" value="clear" />
+          <ActionButton buttonStyle="action" value="÷"/>
+          <NumberButton buttonStyle="number" value="7"/>
+          <NumberButton buttonStyle="number" value="8"/>
+          <NumberButton buttonStyle="number" value="9"/>
+          <ActionButton buttonStyle="action" value="×"/>
+          <NumberButton buttonStyle="number" value="4"/>
+          <NumberButton buttonStyle="number" value="5"/>
+          <NumberButton buttonStyle="number" value="6"/>
+          <ActionButton buttonStyle="action" value="-"/>
+          <NumberButton buttonStyle="number" value="1"/>
+          <NumberButton buttonStyle="number" value="2"/>
+          <NumberButton buttonStyle="number" value="3"/>
+          <ActionButton buttonStyle="action" value="+"/>
+          <NumberButton buttonStyle="number zero" value="0" />
+          <ActionButton buttonStyle="action" value="="/>
         </div>
       </div>
     );

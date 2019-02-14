@@ -1,24 +1,15 @@
-.clear,
-.zero {
-    border: 1px solid grey;
-    font-size: 4rem;
-    height: 94px;
-    width: 75%;
-}
-
-.clear {
-    font-weight: lighter;
-}
-
-.zero {
-    font-weight: bolder;
-}
-
-.number,
-.symbol {
+.action,
+.number {
     border: 1px solid grey;
     height: 94px;
     width: 25%;
+}
+
+.action {
+    background-color: #A01C1D;
+    font-size: 7rem;
+    font-weight: lighter;
+    color: #fff;
 }
 
 .number {
@@ -26,9 +17,16 @@
     font-weight: bolder;
 }
 
-.symbol {
-    background-color: #A01C1D;
-    font-size: 7rem;
-    font-weight: lighter;
-    color: #fff;
+.clear,
+.zero {
+    width: 75%;
 }
+
+.clear {
+    background-color: #fff;
+    color: #000;
+    font-size: 4rem;
+}
+
+
+
