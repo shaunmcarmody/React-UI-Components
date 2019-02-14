@@ -83,19 +83,19 @@ class App extends React.Component {
         <CalculatorDisplay displayStyle="display" value={this.state.display}/>
         <div className="flex wrap">
           <ActionButton value="clear" buttonStyle="action clear" handleAction={this.clearAll} />
-          <ActionButton value="÷" buttonStyle="action" operator='D' handleAction={e => this.assignOperator(this.divide, e)} />
+          <ActionButton value="÷" buttonStyle="action" handleAction={e => this.assignOperator(this.divide, e)} />
           <NumberButton value="7" buttonStyle="number" currentNumber={this.currentNumber} />
           <NumberButton value="8" buttonStyle="number" currentNumber={this.currentNumber} />
           <NumberButton value="9" buttonStyle="number" currentNumber={this.currentNumber} />
-          <ActionButton value="×" buttonStyle="action" operator='M' handleAction={e => this.assignOperator(this.mutliply, e)} />
+          <ActionButton value="×" buttonStyle="action" handleAction={e => this.assignOperator(this.mutliply, e)} />
           <NumberButton value="4" buttonStyle="number" currentNumber={this.currentNumber} />
           <NumberButton value="5" buttonStyle="number" currentNumber={this.currentNumber} />
           <NumberButton value="6" buttonStyle="number" currentNumber={this.currentNumber} />
-          <ActionButton value="-" buttonStyle="action" operator='S' handleAction={e => this.assignOperator(this.subtract, e)} />
+          <ActionButton value="-" buttonStyle="action" handleAction={e => this.assignOperator(this.subtract, e)} />
           <NumberButton value="1" buttonStyle="number" currentNumber={this.currentNumber} />
           <NumberButton value="2" buttonStyle="number" currentNumber={this.currentNumber} />
           <NumberButton value="3" buttonStyle="number" currentNumber={this.currentNumber} />
-          <ActionButton value="+" buttonStyle="action" operator='A' handleAction={e => this.assignOperator(this.add, e)} />
+          <ActionButton value="+" buttonStyle="action" handleAction={e => this.assignOperator(this.add, e)} />
           <NumberButton value="0" buttonStyle="number zero" currentNumber={this.currentNumber} />
           <ActionButton value="=" buttonStyle="action" handleAction={this.getTotal}/>
         </div>
