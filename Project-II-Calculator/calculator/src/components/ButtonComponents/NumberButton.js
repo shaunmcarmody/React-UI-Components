@@ -5,7 +5,7 @@ const NumberButton = props => {
     return (
         <button
             className={props.buttonStyle}
-            onClick={props.assignCurrent}
+            onClick={props.currentNumber}
             value={props.value}
         >
             {props.value}

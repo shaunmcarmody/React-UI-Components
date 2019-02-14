@@ -9,13 +9,12 @@ class App extends React.Component {
     super();
     this.state = {
       current: 0,
-      operator: null,
+      calculate: null,
+      display: 0,
       previous: 0,
-      display: 0
+      total: 0,
     }
   }
-
-
 
   add = (a, b) => {
     return this.state.previous + this.state.current;
@@ -33,83 +32,72 @@ class App extends React.Component {
     return this.state.previous - this.state.current;
   }
 
-  clearAll = () => {
-    this.setState({
-      current: 0,
-      operator: null,
-      previous: 0,
-      display: this.state.current
-    });
+  // Try and refactor - make more modular
+  assignOperator = (operator, e) => {
+    if (this.state.calculate !== null) {
+      this.setState({
+        previous: this.state.calculate(),
+        current: 0,
+        display: this.state.calculate()
+      });
+    } else {
+      this.setState({
+        previous: this.state.current,
+        current: 0,
+        calculate: operator,
+        display: this.state.previous
+      });
+    }
   }
 
   calculate = () => {
-    let total = null;
-    total = this.state.operator === 'A' ? this.add() : total;
-    total = this.state.operator === 'D' ? this.divide() : total;
-    total = this.state.operator === 'M' ? this.mutliply() : total;
-    total = this.state.operator === 'S' ? this.subtract() : total;
-    return total;
+    const total = this.state.calculate();
+    this.setState({ total });
+    this.updateDisplay(total);
   }
 
-  assignOperator = e => {
-    if (this.state.operator && this.state.current && this.state.previous) {
-      const total = this.calculate();
-      return this.setState({
-        previous: total,
-        current: 0,
-        operator: e.target.value,
-        display: total
-      });
-    }
-
-    this.setState({
-      previous: this.state.current,
-      current: 0,
-      operator: e.target.value,
-      display: this.state.previous
-    });
+  clearAll = () => {
+    this.setState({ current: 0, calculate: null, previous: 0, total: 0 });
+    this.updateDisplay(0);
   }
 
-  assignCurrent = e => {
-    this.setState({
-      current: parseInt(`${this.state.current}${e.target.value}`),
-      display: parseInt(`${this.state.current}${e.target.value}`),
-    });
+  currentNumber = e => {
+    if (this.state.calculate === null && this.state.total > 0) this.resetTotal();
+    const current = parseInt(`${this.state.current}${e.target.value}`);
+    this.setState({ current });
+    this.updateDisplay(current);
   }
 
-  renderTotal = () => {
-    if (this.state.operator && this.state.current && this.state.previous) {
-      const total = this.calculate();
-      return this.setState({
-        previous: total,
-        current: 0,
-        operator: null,
-        display: total
-      });
-    }
+  getTotal = () => {
+    this.calculate();
+    this.setState({ calculate: null, current: this.state.total, previous: 0 })
   }
+  
+  resetTotal = () => this.setState({ total: 0 });
+
+  updateDisplay = (display) => this.setState({ display });
 
   render() {
     return (
       <div className="calculator">
         <CalculatorDisplay displayStyle="display" value={this.state.display}/>
         <div className="flex wrap">
-          <ActionButton value="clear"  buttonStyle="action clear" handleAction={this.clearAll} />
-          <ActionButton value="÷" buttonStyle="action" operator='D' handleAction={this.assignOperator} />
-          <NumberButton value="7" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <NumberButton value="8" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <NumberButton value="9" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <ActionButton value="×" buttonStyle="action" operator='M' handleAction={this.assignOperator} />
-          <NumberButton value="4" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <NumberButton value="5" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <NumberButton value="6" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <ActionButton value="-" buttonStyle="action" operator='S' handleAction={this.assignOperator} />
-          <NumberButton value="1" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <NumberButton value="2" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <NumberButton value="3" buttonStyle="number" assignCurrent={this.assignCurrent} />
-          <ActionButton value="+" buttonStyle="action" operator='A' handleAction={this.assignOperator} />
-          <NumberButton value="0" buttonStyle="number zero" assignCurrent={this.assignCurrent} />
-          <ActionButton value="=" buttonStyle="action" handleAction={this.renderTotal}/>
+          <ActionButton value="clear" buttonStyle="action clear" handleAction={this.clearAll} />
+          <ActionButton value="÷" buttonStyle="action" operator='D' handleAction={e => this.assignOperator(this.divide, e)} />
+          <NumberButton value="7" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="8" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="9" buttonStyle="number" currentNumber={this.currentNumber} />
+          <ActionButton value="×" buttonStyle="action" operator='M' handleAction={e => this.assignOperator(this.mutliply, e)} />
+          <NumberButton value="4" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="5" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="6" buttonStyle="number" currentNumber={this.currentNumber} />
+          <ActionButton value="-" buttonStyle="action" operator='S' handleAction={e => this.assignOperator(this.subtract, e)} />
+          <NumberButton value="1" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="2" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="3" buttonStyle="number" currentNumber={this.currentNumber} />
+          <ActionButton value="+" buttonStyle="action" operator='A' handleAction={e => this.assignOperator(this.add, e)} />
+          <NumberButton value="0" buttonStyle="number zero" currentNumber={this.currentNumber} />
+          <ActionButton value="=" buttonStyle="action" handleAction={this.getTotal}/>
         </div>
       </div>
     );
