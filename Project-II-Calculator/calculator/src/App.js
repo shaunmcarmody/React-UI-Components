@@ -4,34 +4,97 @@ import ActionButton from './components/ButtonComponents/ActionButton';
 import NumberButton from './components/ButtonComponents/NumberButton';
 import CalculatorDisplay from './components/DisplayComponents/CalculatorDisplay';
 
-const App = () => {
-  return (
-    <div className="calculator">
-      <CalculatorDisplay displayStyle="display" text="0"/>
-      <div className="flex">
-        <ActionButton buttonStyle="clear" text="clear" />
-        <NumberButton buttonStyle="symbol" text="÷"/>
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      current: 0,
+      calculate: null,
+      display: 0,
+      previous: 0,
+      total: 0,
+    }
+  }
+
+  add = (a, b) => this.state.previous + this.state.current;
+
+  divide = (a, b) => this.state.previous / this.state.current;
+
+  mutliply = (a, b) => this.state.previous * this.state.current;
+
+  subtract = (a, b) => this.state.previous - this.state.current;
+
+  // Try and refactor - make more modular - invoke this.calculate to update display, total and view.
+  assignOperator = (operator) => {
+    if (this.state.calculate !== null) {
+      this.setState({
+        previous: this.state.calculate(),
+        current: 0,
+        display: this.state.calculate()
+      });
+    } else {
+      this.setState({
+        previous: this.state.current,
+        current: 0,
+        calculate: operator,
+        display: this.state.previous
+      });
+    }
+  }
+
+  calculate = () => {
+    if (this.state.calculate === null) return;
+    const total = this.state.calculate();
+    this.setState({ total });
+    this.updateDisplay(total);
+  }
+
+  clearAll = () => {
+    this.setState({ current: 0, calculate: null, previous: 0, total: 0 });
+    this.updateDisplay(0);
+  }
+
+  currentNumber = e => {
+    if (this.state.calculate === null && this.state.total > 0) this.resetTotal();
+    const current = parseInt(`${this.state.current}${e.target.value}`);
+    this.setState({ current });
+    this.updateDisplay(current);
+  }
+
+  getTotal = () => {
+    this.calculate();
+    this.setState({ calculate: null, current: this.state.total, previous: 0 })
+  }
+  
+  resetTotal = () => this.setState({ total: 0 });
+
+  updateDisplay = (display) => this.setState({ display });
+
+  render() {
+    return (
+      <div className="calculator">
+        <CalculatorDisplay displayStyle="display" value={this.state.display}/>
+        <div className="flex wrap">
+          <ActionButton value="clear" buttonStyle="action clear" handleAction={this.clearAll} />
+          <ActionButton value="÷" buttonStyle="action" handleAction={e => this.assignOperator(this.divide)} />
+          <NumberButton value="7" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="8" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="9" buttonStyle="number" currentNumber={this.currentNumber} />
+          <ActionButton value="×" buttonStyle="action" handleAction={e => this.assignOperator(this.mutliply)} />
+          <NumberButton value="4" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="5" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="6" buttonStyle="number" currentNumber={this.currentNumber} />
+          <ActionButton value="-" buttonStyle="action" handleAction={e => this.assignOperator(this.subtract)} />
+          <NumberButton value="1" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="2" buttonStyle="number" currentNumber={this.currentNumber} />
+          <NumberButton value="3" buttonStyle="number" currentNumber={this.currentNumber} />
+          <ActionButton value="+" buttonStyle="action" handleAction={e => this.assignOperator(this.add)} />
+          <NumberButton value="0" buttonStyle="number zero" currentNumber={this.currentNumber} />
+          <ActionButton value="=" buttonStyle="action" handleAction={this.getTotal}/>
+        </div>
       </div>
-      <div className="flex wrap">
-        <NumberButton buttonStyle="number" text="7"/>
-        <NumberButton buttonStyle="number" text="8"/>
-        <NumberButton buttonStyle="number" text="9"/>
-        <NumberButton buttonStyle="symbol" text="×"/>
-        <NumberButton buttonStyle="number" text="4"/>
-        <NumberButton buttonStyle="number" text="5"/>
-        <NumberButton buttonStyle="number" text="6"/>
-        <NumberButton buttonStyle="symbol" text="-"/>
-        <NumberButton buttonStyle="number" text="1"/>
-        <NumberButton buttonStyle="number" text="2"/>
-        <NumberButton buttonStyle="number" text="3"/>
-        <NumberButton buttonStyle="symbol" text="+"/>
-      </div>
-      <div className="flex">
-      <ActionButton buttonStyle="big zero" text="0" />
-        <NumberButton buttonStyle="symbol" text="="/>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default App;
